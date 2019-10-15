@@ -1,11 +1,11 @@
 package br.edu.ifrs.poa.lecc.testes.domain.enuns;
 
-public enum Sexo {
-	FEMININO("Feminino"), MASCULINO("Masculino");
+public enum TipoPergunta {
+	LETRA("Letra"), ESCRITA("Escrita");
 	
 	private String desc;
 	
-	private Sexo(String desc) {
+	private TipoPergunta(String desc) {
 		this.desc = desc;
 	}
 	

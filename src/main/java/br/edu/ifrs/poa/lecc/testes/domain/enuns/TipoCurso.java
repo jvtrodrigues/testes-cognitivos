@@ -7,4 +7,8 @@ public enum TipoCurso {
 	private TipoCurso(String desc) {
 		this.desc = desc;
 	}
+	
+	public String getDesc() {
+		return desc;
+	}
 }
