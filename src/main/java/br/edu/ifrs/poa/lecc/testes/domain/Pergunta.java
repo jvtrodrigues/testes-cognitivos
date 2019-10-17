@@ -3,32 +3,45 @@ package br.edu.ifrs.poa.lecc.testes.domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import br.edu.ifrs.poa.lecc.testes.domain.enuns.TipoPergunta;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pergunta implements Serializable {
-private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String enunciado;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoPergunta tipoPergunta;
+	
 	private boolean exemplo;
 	
-	public Pergunta() {}
 
-	public Pergunta(Integer id, String enunciado, boolean exemplo) {
+	public Pergunta() {
+	}
+
+	
+
+	public Pergunta(Integer id, String enunciado, TipoPergunta tipoPergunta, boolean exemplo) {
 		super();
 		this.id = id;
 		this.enunciado = enunciado;
+		this.tipoPergunta = tipoPergunta;
 		this.exemplo = exemplo;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -51,6 +64,14 @@ private static final long serialVersionUID = 1L;
 
 	public void setExemplo(boolean exemplo) {
 		this.exemplo = exemplo;
+	}
+
+	public TipoPergunta getTipoPergunta() {
+		return tipoPergunta;
+	}
+
+	public void setTipoPergunta(TipoPergunta tipoPergunta) {
+		this.tipoPergunta = tipoPergunta;
 	}
 
 	@Override
@@ -77,6 +98,5 @@ private static final long serialVersionUID = 1L;
 			return false;
 		return true;
 	}
-	
-	
+
 }
