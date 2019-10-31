@@ -10,6 +10,7 @@ import br.edu.ifrs.poa.lecc.testes.domain.enuns.TipoPergunta;
 @Entity
 public class PerguntaMultiplaEscolha extends MultiplaEscolha {
 	private static final long serialVersionUID = 1L;
+	
 	@Enumerated(EnumType.STRING)
 	private Letra letraCorreta;
 	

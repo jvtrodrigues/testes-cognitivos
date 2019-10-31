@@ -85,6 +85,7 @@ public class TestesCognitivosApplication implements CommandLineRunner {
 		pergMultResp2.setOpcoes(opcoes2);
 		pergMultResp2.setLetrasCorretas(letrasCorretas2);
 		
+		
 		pesquiRepo.saveAll(Arrays.asList(pesq1, pesq2));
 		alunoRepo.saveAll(Arrays.asList(a1));
 		perEscRepo.saveAll(Arrays.asList(perEsc1, perEsc2));

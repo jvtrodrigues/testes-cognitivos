@@ -16,6 +16,7 @@ import br.edu.ifrs.poa.lecc.testes.domain.enuns.TipoPergunta;
 public class PerguntaMultiResposta extends MultiplaEscolha {
 	private static final long serialVersionUID = 1L;
 	
+	
 	@ElementCollection
 	@CollectionTable(name="LETRAS_CORRETAS_PERGUNTA")
 	@Enumerated(EnumType.STRING)
