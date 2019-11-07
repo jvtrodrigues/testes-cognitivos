@@ -1,6 +1,7 @@
 package br.edu.ifrs.poa.lecc.testes.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,37 +11,28 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-import br.edu.ifrs.poa.lecc.testes.domain.enuns.TipoPergunta;
+import br.edu.ifrs.poa.lecc.testes.domain.enuns.StatusResposta;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pergunta implements Serializable {
+public abstract class Resposta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String enunciado;
-	
 	@Enumerated(EnumType.STRING)
-	private TipoPergunta tipoPergunta;
-	
-	private boolean exemplo;
-	
+	private StatusResposta statusRespota;
 
-	public Pergunta() {
+	public Resposta() {
 	}
 
-	
-
-	public Pergunta(Integer id, String enunciado, TipoPergunta tipoPergunta, boolean exemplo) {
+	public Resposta(Integer id, StatusResposta statusRespota) {
 		super();
 		this.id = id;
-		this.enunciado = enunciado;
-		this.tipoPergunta = tipoPergunta;
-		this.exemplo = exemplo;
+		this.statusRespota = statusRespota;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -49,28 +41,12 @@ public abstract class Pergunta implements Serializable {
 		this.id = id;
 	}
 
-	public String getEnunciado() {
-		return enunciado;
+	public StatusResposta getStatusRespota() {
+		return statusRespota;
 	}
 
-	public void setEnunciado(String enunciado) {
-		this.enunciado = enunciado;
-	}
-
-	public boolean isExemplo() {
-		return exemplo;
-	}
-
-	public void setExemplo(boolean exemplo) {
-		this.exemplo = exemplo;
-	}
-
-	public TipoPergunta getTipoPergunta() {
-		return tipoPergunta;
-	}
-
-	public void setTipoPergunta(TipoPergunta tipoPergunta) {
-		this.tipoPergunta = tipoPergunta;
+	public void setStatusRespota(StatusResposta statusRespota) {
+		this.statusRespota = statusRespota;
 	}
 
 	@Override
@@ -89,7 +65,7 @@ public abstract class Pergunta implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pergunta other = (Pergunta) obj;
+		Resposta other = (Resposta) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -98,4 +74,5 @@ public abstract class Pergunta implements Serializable {
 		return true;
 	}
 
+	public abstract void corrige();
 }

@@ -28,8 +28,6 @@ public class PerguntaMultiResposta extends MultiplaEscolha {
 		super(id, enunciado, tipoPergunta, exemplo);
 	}
 
-
-
 	public Set<Letra> getLetrasCorretas() {
 		return letrasCorretas;
 	}
