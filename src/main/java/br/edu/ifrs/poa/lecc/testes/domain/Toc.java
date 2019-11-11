@@ -21,6 +21,7 @@ public abstract class Toc implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Enumerated(EnumType.STRING)
 	private Resultado resultado;
 

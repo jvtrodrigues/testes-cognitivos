@@ -21,9 +21,10 @@ public abstract class Resposta implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Enumerated(EnumType.STRING)
 	private StatusResposta statusRespota;
-
+	
 	public Resposta() {
 	}
 
@@ -32,7 +33,7 @@ public abstract class Resposta implements Serializable {
 		this.id = id;
 		this.statusRespota = statusRespota;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -48,7 +49,7 @@ public abstract class Resposta implements Serializable {
 	public void setStatusRespota(StatusResposta statusRespota) {
 		this.statusRespota = statusRespota;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

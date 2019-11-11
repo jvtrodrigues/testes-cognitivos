@@ -11,28 +11,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.edu.ifrs.poa.lecc.testes.domain.enuns.Resultado;
 
 @Entity
-public class Tofc extends Toc {
+public class Tofp extends Toc {
 	private static final long serialVersionUID = 1L;
 	
 	@JsonIgnore
 	@Column(nullable = true)
 	@OneToMany(mappedBy = "toc")
-	private List<RespostaEscrita> respostasEscritas  = new ArrayList<>();
+	private List<RespostaMultiplaEscolha> respostasMultiplaEscolha  = new ArrayList<>();
 	
-	public Tofc() {
+	public Tofp() {
 		super();
 	}
 	
-	public Tofc(Integer id, Resultado resultado) {
+	public Tofp(Integer id, Resultado resultado) {
 		super(id, resultado);
 	}
-	
-	public List<RespostaEscrita> getRespostasEscritas() {
-		return respostasEscritas;
+
+	public List<RespostaMultiplaEscolha> getRespostasMultiplaEscolha() {
+		return respostasMultiplaEscolha;
 	}
 
-	public void setRespostasEscritas(List<RespostaEscrita> respostasEscritas) {
-		this.respostasEscritas = respostasEscritas;
+	public void setRespostasMultiplaEscolha(List<RespostaMultiplaEscolha> respostasMultiplaEscolha) {
+		this.respostasMultiplaEscolha = respostasMultiplaEscolha;
 	}
 
 	@Override

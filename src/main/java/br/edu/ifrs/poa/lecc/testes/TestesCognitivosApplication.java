@@ -1,10 +1,12 @@
 package br.edu.ifrs.poa.lecc.testes;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +18,27 @@ import br.edu.ifrs.poa.lecc.testes.domain.Aluno;
 import br.edu.ifrs.poa.lecc.testes.domain.PerguntaEscrita;
 import br.edu.ifrs.poa.lecc.testes.domain.PerguntaMultiResposta;
 import br.edu.ifrs.poa.lecc.testes.domain.Pesquisador;
+import br.edu.ifrs.poa.lecc.testes.domain.RespostaEscrita;
+import br.edu.ifrs.poa.lecc.testes.domain.RespostaMultiResposta;
+import br.edu.ifrs.poa.lecc.testes.domain.Tofc;
+import br.edu.ifrs.poa.lecc.testes.domain.Toflp;
+import br.edu.ifrs.poa.lecc.testes.domain.Tofp;
 import br.edu.ifrs.poa.lecc.testes.domain.enuns.Letra;
+import br.edu.ifrs.poa.lecc.testes.domain.enuns.Resultado;
 import br.edu.ifrs.poa.lecc.testes.domain.enuns.Sexo;
+import br.edu.ifrs.poa.lecc.testes.domain.enuns.StatusResposta;
 import br.edu.ifrs.poa.lecc.testes.domain.enuns.TipoCurso;
 import br.edu.ifrs.poa.lecc.testes.domain.enuns.TipoPergunta;
 import br.edu.ifrs.poa.lecc.testes.repositories.AlunoRepository;
 import br.edu.ifrs.poa.lecc.testes.repositories.PerguntaEscritaRepository;
 import br.edu.ifrs.poa.lecc.testes.repositories.PerguntaMultiRespostaRepository;
 import br.edu.ifrs.poa.lecc.testes.repositories.PesquisadorRepository;
+import br.edu.ifrs.poa.lecc.testes.repositories.RespostaEscritaRepository;
+import br.edu.ifrs.poa.lecc.testes.repositories.RespostaMultiRespostaRepository;
+import br.edu.ifrs.poa.lecc.testes.repositories.RespostaMultiplaEscolhaRepository;
+import br.edu.ifrs.poa.lecc.testes.repositories.TofcRepository;
+import br.edu.ifrs.poa.lecc.testes.repositories.ToflpRepository;
+import br.edu.ifrs.poa.lecc.testes.repositories.TofpRepository;
 
 @SpringBootApplication
 public class TestesCognitivosApplication implements CommandLineRunner {
@@ -35,6 +50,18 @@ public class TestesCognitivosApplication implements CommandLineRunner {
 	private PerguntaEscritaRepository perEscRepo;
 	@Autowired
 	private PerguntaMultiRespostaRepository perMultiRespRepo;
+	@Autowired
+	private TofcRepository tofcRepo;
+	@Autowired
+	private RespostaEscritaRepository resEscRepo;
+	@Autowired
+	private TofpRepository tofpRepo;
+	@Autowired
+	private RespostaMultiplaEscolhaRepository resMulEscRepo;
+	@Autowired
+	private ToflpRepository toflpRepo;
+	@Autowired
+	private RespostaMultiRespostaRepository resMulResRepo;
 	public static void main(String[] args) {
 		SpringApplication.run(TestesCognitivosApplication.class, args);
 	}
@@ -85,13 +112,48 @@ public class TestesCognitivosApplication implements CommandLineRunner {
 		pergMultResp2.setOpcoes(opcoes2);
 		pergMultResp2.setLetrasCorretas(letrasCorretas2);
 		
-		//RespostaEscrita respEsc = new RespostaEscrita();
+		Tofc t1 = new Tofc(null, Resultado.CONCRETO);
+		Tofp t2 = new Tofp(null, Resultado.CONCRETO);
+		Toflp t3 = new Toflp(null, Resultado.CONCRETO);
 		
+		tofcRepo.saveAll(Arrays.asList(t1));
+		tofpRepo.saveAll(Arrays.asList(t2));
+		toflpRepo.saveAll(Arrays.asList(t3));
+		
+		perEscRepo.saveAll(Arrays.asList(perEsc1, perEsc2));
+		perMultiRespRepo.saveAll(Arrays.asList(pergMultResp1, pergMultResp2));
+		
+		RespostaEscrita respEsc = new RespostaEscrita(null, StatusResposta.NAO_RESPONDIDA, "Desconheço", perEsc1, t1);
+		RespostaMultiResposta respMultResp = new RespostaMultiResposta(null, StatusResposta.NAO_RESPONDIDA, pergMultResp1, t3);
+		Letra letras [] = {Letra.A, Letra.D};
+		respMultResp.setRespostasLetra(new HashSet<Letra>(Arrays.asList(letras)));
+		
+		resEscRepo.saveAll(Arrays.asList(respEsc));
+		resMulResRepo.saveAll(Arrays.asList(respMultResp));
+		
+		List<RespostaEscrita> listResEsc = new ArrayList<>();
+		listResEsc.add(respEsc);
+		t1.setRespostasEscritas(listResEsc);
+		
+		List<RespostaMultiResposta> listResMulRes = new ArrayList<>();
+		listResMulRes.add(respMultResp);
+		t3.setRespostasMultiRespostas(listResMulRes);
+		
+		tofcRepo.saveAll(Arrays.asList(t1));
+		toflpRepo.saveAll(Arrays.asList(t3));
 		
 		pesquiRepo.saveAll(Arrays.asList(pesq1, pesq2));
 		alunoRepo.saveAll(Arrays.asList(a1));
-		perEscRepo.saveAll(Arrays.asList(perEsc1, perEsc2));
-		perMultiRespRepo.saveAll(Arrays.asList(pergMultResp1, pergMultResp2));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }
